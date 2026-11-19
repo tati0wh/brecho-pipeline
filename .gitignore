@@ -1,0 +1,15 @@
+# Segredos
+.env
+
+# Dados (ficam só na sua máquina)
+data/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Editor e sistema
+.vscode/
+.DS_Store
+Thumbs.db
