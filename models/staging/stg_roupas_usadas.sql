@@ -42,9 +42,11 @@ limpo as (
         -- descrição: mantém as quebras de linha (elas organizam o texto), só tira as pontas
         nullif(trim(descricao), '')                                     as descricao,
 
-        -- preços: vírgula decimal vira ponto, e o texto vira número
-        cast(nullif(replace(trim(preco_com_desconto), ',', '.'), '') as numeric(10, 2)) as preco_com_desconto,
-        cast(nullif(replace(trim(preco_sem_desconto), ',', '.'), '') as numeric(10, 2)) as preco_sem_desconto,
+        -- preços: a vírgula é usada como decimal E como milhar ("1,000,00" = mil reais).
+        -- Por isso, só a última vírgula é decimal: as anteriores são removidas,
+        -- e a última vira ponto. Depois o texto vira número.
+        cast(nullif(replace(regexp_replace(trim(preco_com_desconto), ',(?=.*,)', '', 'g'), ',', '.'), '') as numeric(10, 2)) as preco_com_desconto,
+        cast(nullif(replace(regexp_replace(trim(preco_sem_desconto), ',(?=.*,)', '', 'g'), ',', '.'), '') as numeric(10, 2)) as preco_sem_desconto,
 
         _arquivo_origem,
         _linha_origem,

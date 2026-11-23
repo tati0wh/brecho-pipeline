@@ -1,0 +1,76 @@
+version: 2
+
+# Todas as chaves dos seeds estão no formato da macro normalizar_chave:
+# minúsculas, sem acento, e pontuação trocada por espaço.
+
+seeds:
+  - name: map_condicao
+    description: >
+      Padronização da condição da peça. Cada grafia aponta para um valor
+      oficial e para a ordem de conservação (1 = mais conservada).
+    columns:
+      - name: condicao_chave
+        data_tests: [unique, not_null]
+      - name: condicao_padronizada
+        data_tests: [not_null]
+
+  - name: map_marca
+    description: >
+      Exceções de marca que a normalização automática não resolve sozinha:
+      grafias oficiais, erros de digitação e linhas que pertencem a uma marca.
+    columns:
+      - name: marca_chave
+        data_tests: [unique, not_null]
+      - name: marca_padronizada
+        data_tests: [not_null]
+
+  - name: map_marca_inferida
+    description: >
+      Termos que, quando aparecem no nome ou na descrição de uma peça "Sem marca",
+      indicam a marca provável. Vindo do notebook original (mapeamento_marcas_faltantes).
+    columns:
+      - name: termo_chave
+        data_tests: [unique, not_null]
+
+  - name: map_tipo_peca
+    description: >
+      Palavras que indicam o tipo da peça, vindas do notebook original
+      (mapeamento_peca). Prioridade 1 = palavra forte (o nome do tipo: "vestido",
+      "sandália"). Prioridade 2 = palavra fraca, que só decide se não houver
+      palavra forte ("jeans", "skinny", "salto").
+    config:
+      column_types:
+        palavra_chave: text
+    columns:
+      - name: palavra_chave
+        data_tests: [unique, not_null]
+      - name: prioridade
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2]
+
+  - name: map_cor
+    description: >
+      Palavras que indicam o grupo de cor, vindas do notebook original
+      (mapeamento_cores). A comparação é sempre por palavra inteira.
+    config:
+      column_types:
+        palavra_chave: text
+    columns:
+      - name: palavra_chave
+        data_tests: [unique, not_null]
+
+  - name: map_tamanho
+    description: >
+      Padronização de tamanhos. tamanho_numerico guarda a equivalência numérica
+      (letras: PP=34, P=36, M=38, G=40, GG=42, XGG=44, XXGG=46, como no notebook).
+      tipo_rotulo diz como o tamanho foi escrito (letra, numero, meses, anos...).
+    config:
+      column_types:
+        tamanho_chave: text
+        tamanho_padronizado: text
+        tamanho_numerico: integer
+    columns:
+      - name: tamanho_chave
+        data_tests: [unique, not_null]

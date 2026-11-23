@@ -1,0 +1,84 @@
+version: 2
+
+models:
+  - name: int_marcas
+    description: >
+      Uma linha por marca. Junta as grafias que só diferem em maiúsculas,
+      acentos ou pontuação e escolhe um nome oficial, aplicando antes as
+      regras do seed map_marca.
+    columns:
+      - name: marca_chave
+        data_tests: [unique, not_null]
+      - name: marca_padronizada
+        data_tests: [not_null]
+      - name: metodo
+        description: "mapeamento (regra do seed) ou automatico (grafia preferida)."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['mapeamento', 'automatico']
+
+  - name: int_tipo_peca
+    description: Tipo da peça descoberto pelas palavras do nome ou da descrição.
+    columns:
+      - name: id_peca
+        data_tests: [unique, not_null]
+      - name: metodo_tipo_peca
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['inferido_nome', 'inferido_descricao', 'nao_identificado']
+
+  - name: int_cores
+    description: Grupo de cor, informado pela vendedora ou inferido do texto.
+    columns:
+      - name: id_peca
+        data_tests: [unique, not_null]
+      - name: metodo_cor
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['informado', 'inferido_nome', 'inferido_descricao', 'nao_identificado']
+
+  - name: int_roupas_padronizadas
+    description: >
+      Anúncios com todas as regras de negócio aplicadas. Cada campo padronizado
+      fica ao lado do valor original e do método usado.
+    columns:
+      - name: id_peca
+        data_tests: [unique, not_null]
+      - name: marca_padronizada
+        data_tests: [not_null]
+      - name: metodo_marca
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['mapeamento', 'automatico', 'nao_informado']
+      - name: condicao_padronizada
+        description: >
+          Se este teste falhar, apareceu uma condição nova que ainda não
+          tem regra no seed map_condicao.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Nova com etiqueta', 'Novo sem etiqueta', 'Gentilmente usada', 'Usado']
+      - name: tamanho_padronizado
+        description: >
+          Aviso (não erro): lista tamanhos informados que ainda não têm regra no
+          seed map_tamanho. Rode "dbt test" e veja quais são para criar as regras.
+        data_tests:
+          - not_null:
+              config:
+                where: "tamanho_original is not null"
+                severity: warn
+      - name: sistema_tamanho
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Não informado', 'Não mapeado', 'Único', 'Calçado', 'Infantil', 'Adulto (numeração)', 'Adulto (letras)']
+      - name: tipo_peca
+        data_tests: [not_null]
+      - name: grupo_cor
+        data_tests: [not_null]

@@ -11,6 +11,7 @@ clean-targets: ["target", "dbt_packages"]
 
 # Antes de cada execução, garante que a função de correção de encoding existe no banco.
 on-run-start:
+  - "create extension if not exists unaccent"
   - "{{ criar_funcao_corrigir_encoding() }}"
 
 models:
@@ -18,3 +19,10 @@ models:
     staging:
       +schema: staging
       +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+
+seeds:
+  brecho:
+    +schema: seeds

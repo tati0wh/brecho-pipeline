@@ -1,0 +1,103 @@
+tamanho_chave,tamanho_padronizado,tamanho_numerico,tipo_rotulo
+pp,PP,34,letra
+p,P,36,letra
+m,M,38,letra
+g,G,40,letra
+gg,GG,42,letra
+g2,GG,42,letra
+ggg,XGG,44,letra
+xgg,XGG,44,letra
+g3,XGG,44,letra
+xlg,XGG,44,letra
+xg,XGG,44,letra
+gggg,XXGG,46,letra
+g4,XXGG,46,letra
+4g,XXGG,46,letra
+5g,5G,48,letra
+u,Único,,unico
+unico,Único,,unico
+rn,RN,,recem_nascido
+1m,1 meses,1,meses
+3m,3 meses,3,meses
+6m,6 meses,6,meses
+9m,9 meses,9,meses
+10m,10 meses,10,meses
+12m,12 meses,12,meses
+18m,18 meses,18,meses
+24m,24 meses,24,meses
+1a,1 anos,1,anos
+2a,2 anos,2,anos
+3a,3 anos,3,anos
+4a,4 anos,4,anos
+5a,5 anos,5,anos
+6a,6 anos,6,anos
+7a,7 anos,7,anos
+8a,8 anos,8,anos
+9a,9 anos,9,anos
+10a,10 anos,10,anos
+11a,11 anos,11,anos
+12a,12 anos,12,anos
+13a,13 anos,13,anos
+14a,14 anos,14,anos
+15a,15 anos,15,anos
+16a,16 anos,16,anos
+1,1,1,numero
+2,2,2,numero
+3,3,3,numero
+4,4,4,numero
+5,5,5,numero
+6,6,6,numero
+7,7,7,numero
+8,8,8,numero
+9,9,9,numero
+10,10,10,numero
+11,11,11,numero
+12,12,12,numero
+13,13,13,numero
+14,14,14,numero
+15,15,15,numero
+16,16,16,numero
+17,17,17,numero
+18,18,18,numero
+19,19,19,numero
+20,20,20,numero
+21,21,21,numero
+22,22,22,numero
+23,23,23,numero
+24,24,24,numero
+25,25,25,numero
+26,26,26,numero
+27,27,27,numero
+28,28,28,numero
+29,29,29,numero
+30,30,30,numero
+31,31,31,numero
+32,32,32,numero
+33,33,33,numero
+34,34,34,numero
+35,35,35,numero
+36,36,36,numero
+37,37,37,numero
+38,38,38,numero
+39,39,39,numero
+40,40,40,numero
+41,41,41,numero
+42,42,42,numero
+43,43,43,numero
+44,44,44,numero
+45,45,45,numero
+46,46,46,numero
+47,47,47,numero
+48,48,48,numero
+49,49,49,numero
+50,50,50,numero
+51,51,51,numero
+52,52,52,numero
+53,53,53,numero
+54,54,54,numero
+55,55,55,numero
+56,56,56,numero
+57,57,57,numero
+58,58,58,numero
+59,59,59,numero
+60,60,60,numero

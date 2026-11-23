@@ -1,0 +1,441 @@
+palavra_chave,tipo_peca,prioridade
+acessorio,Acessório,1
+aneis,Acessório,1
+anel,Acessório,1
+anelbolinhas,Acessório,1
+armacao,Acessório,1
+arquinho,Acessório,1
+babador,Acessório,1
+bandana,Acessório,1
+bijuterias,Acessório,1
+boina,Acessório,1
+bracelete,Acessório,1
+brinco,Acessório,1
+brincos,Acessório,1
+broche,Acessório,1
+cachecol,Acessório,1
+capa,Acessório,2
+capinha,Acessório,1
+chaveiro,Acessório,1
+chocker,Acessório,1
+choker,Acessório,1
+chokers,Acessório,1
+cinto,Acessório,1
+cintos,Acessório,1
+cola,Acessório,2
+colar,Acessório,1
+correntinha,Acessório,1
+ear,Acessório,2
+echarpe,Acessório,1
+faixa,Acessório,2
+faixinha,Acessório,1
+gargantilha,Acessório,1
+gavata,Acessório,1
+gola,Acessório,2
+grampo,Acessório,1
+gratava,Acessório,1
+gravata,Acessório,1
+laco,Acessório,1
+lacos,Acessório,1
+lencco,Acessório,1
+lencinho,Acessório,1
+lenco,Acessório,1
+lencos,Acessório,1
+luva,Acessório,1
+luvas,Acessório,1
+luvinhas,Acessório,1
+meia,Acessório,1
+meias,Acessório,1
+munhequeira,Acessório,1
+munhequeria,Acessório,1
+oculo,Acessório,1
+oculos,Acessório,1
+oculso,Acessório,1
+pingente,Acessório,1
+polaina,Acessório,1
+porta,Acessório,2
+presilha,Acessório,1
+protetor,Acessório,2
+pulseira,Acessório,1
+pulseiras,Acessório,1
+ray,Acessório,2
+relogio,Acessório,1
+semijoias,Acessório,1
+tiara,Acessório,1
+turbante,Acessório,1
+turca,Acessório,2
+alcinha,Blusa,2
+alcinhas,Blusa,2
+basic,Blusa,2
+basica,Blusa,2
+bata,Blusa,1
+batinha,Blusa,1
+blusa,Blusa,1
+blusas,Blusa,1
+blusinha,Blusa,1
+blusinhas,Blusa,1
+blusinnha,Blusa,1
+bluusa,Blusa,1
+bluza,Blusa,1
+busa,Blusa,1
+businha,Blusa,1
+cachecouer,Blusa,2
+camiseta,Blusa,1
+camisetao,Blusa,1
+camisete,Blusa,1
+camisetinha,Blusa,1
+camista,Blusa,1
+camseita,Blusa,1
+cigana,Blusa,2
+ciganinha,Blusa,1
+cropeed,Blusa,1
+cropped,Blusa,1
+croppped,Blusa,1
+frente,Blusa,2
+look,Blusa,2
+maxiblusa,Blusa,1
+power,Blusa,2
+ragata,Blusa,1
+raglan,Blusa,2
+regat,Blusa,1
+regata,Blusa,1
+regatinha,Blusa,1
+regatona,Blusa,1
+rgata,Blusa,1
+shirt,Blusa,2
+tomara,Blusa,2
+top,Blusa,1
+topcropped,Blusa,1
+tshirt,Blusa,1
+tunica,Blusa,1
+body,Body,1
+collant,Body,1
+bag,Bolsa,2
+birken,Bolsa,1
+bolsa,Bolsa,1
+bolsinha,Bolsa,1
+bosinha,Bolsa,1
+cartao,Bolsa,2
+carteira,Bolsa,1
+carteria,Bolsa,1
+chutch,Bolsa,1
+cluch,Bolsa,1
+clucth,Bolsa,1
+clutch,Bolsa,1
+clutche,Bolsa,1
+clutches,Bolsa,1
+cluthe,Bolsa,1
+ecobag,Bolsa,1
+frasqueira,Bolsa,2
+handbag,Bolsa,1
+mala,Bolsa,1
+maleta,Bolsa,1
+malinha,Bolsa,1
+maxibolsa,Bolsa,1
+minibag,Bolsa,1
+mochila,Bolsa,1
+mochilia,Bolsa,1
+mochilinha,Bolsa,1
+necessaire,Bolsa,1
+necessarie,Bolsa,1
+pasta,Bolsa,2
+pochete,Bolsa,1
+saco,Bolsa,2
+sacola,Bolsa,1
+tintamar,Bolsa,2
+caca,Calça,1
+calca,Calça,1
+calcasocial,Calça,1
+capri,Calça,1
+carca,Calça,1
+cigarrete,Calça,1
+claca,Calça,1
+corsario,Calça,1
+denim,Calça,2
+denin,Calça,2
+flare,Calça,2
+jeans,Calça,2
+jegging,Calça,1
+leeging,Calça,1
+legginf,Calça,1
+legging,Calça,1
+leggins,Calça,1
+leging,Calça,1
+mijao,Calça,1
+pantacourt,Calça,1
+pantacout,Calça,1
+pantalona,Calça,1
+pantalone,Calça,1
+pants,Calça,1
+sarouel,Calça,1
+saruel,Calça,1
+skinny,Calça,2
+sweatpants,Calça,1
+camisa,Camisa,1
+camisao,Camisa,1
+camisas,Camisa,1
+camisetas,Camisa,1
+camiza,Camisa,1
+polo,Camisa,1
+agasalho,Casaco,1
+blusao,Casaco,1
+bomber,Casaco,1
+cacharrel,Casaco,1
+cadigan,Casaco,1
+cardiga,Casaco,1
+cardigam,Casaco,1
+cardigan,Casaco,1
+cardingan,Casaco,1
+cargida,Casaco,1
+casacao,Casaco,1
+casaco,Casaco,1
+casaqueo,Casaco,1
+casaqueta,Casaco,1
+casaqueto,Casaco,1
+casaquinho,Casaco,1
+cashime,Casaco,1
+casqueto,Casaco,1
+casquinho,Casaco,1
+coat,Casaco,1
+corta,Casaco,2
+estola,Casaco,1
+hoodie,Casaco,1
+jaquela,Casaco,1
+jaqueta,Casaco,1
+jaquetinha,Casaco,1
+jaqueto,Casaco,1
+malha,Casaco,2
+moletinho,Casaco,1
+moleto,Casaco,1
+moletom,Casaco,1
+moleton,Casaco,1
+parca,Casaco,1
+parka,Casaco,1
+pull,Casaco,2
+pullover,Casaco,1
+pulover,Casaco,1
+sobretudo,Casaco,1
+sueter,Casaco,1
+sweater,Casaco,1
+trench,Casaco,1
+trenchcoat,Casaco,1
+trico,Casaco,2
+tricot,Casaco,2
+bone,Chapelaria,1
+chapeu,Chapelaria,1
+chapeus,Chapelaria,1
+gorro,Chapelaria,1
+toca,Chapelaria,2
+touca,Chapelaria,1
+touquinha,Chapelaria,1
+viseira,Chapelaria,1
+bolerinho,Colete,1
+bolero,Colete,1
+colete,Colete,1
+coletetropical,Colete,1
+coletinho,Colete,1
+colote,Colete,1
+kimono,Colete,1
+pelerine,Colete,1
+quimono,Colete,1
+conjuntinho,Conjunto,1
+conjunto,Conjunto,1
+camisola,Homewear,1
+hobby,Homewear,1
+pantufa,Homewear,1
+pantufas,Homewear,1
+pijama,Homewear,1
+pijamas,Homewear,1
+robe,Homewear,1
+roupao,Homewear,1
+biquiini,Moda praia,1
+biquini,Moda praia,1
+biquinis,Moda praia,1
+canga,Moda praia,1
+maio,Moda praia,1
+saida,Moda praia,1
+sunga,Moda praia,1
+agenda,Outros,1
+case,Outros,2
+celular,Outros,1
+fantasia,Outros,1
+guitarra,Outros,1
+ipad,Outros,1
+jogo,Outros,2
+livro,Outros,1
+manta,Outros,1
+mantinha,Outros,1
+modular,Outros,2
+panela,Outros,1
+patins,Outros,1
+perfume,Outros,1
+jardineira,Peça única,1
+jardineirinha,Peça única,1
+jardinheira,Peça única,1
+jumpsuit,Peça única,1
+macacao,Peça única,1
+macacaquinho,Peça única,1
+macacquinho,Peça única,1
+macaquinho,Peça única,1
+macaquinhoa,Peça única,1
+macaquinhos,Peça única,1
+maquinho,Peça única,1
+chale,Poncho,1
+poncho,Poncho,1
+ponho,Poncho,1
+xale,Poncho,1
+balzer,Roupa social,1
+blazer,Roupa social,1
+blazerb,Roupa social,1
+brazer,Roupa social,1
+paleto,Roupa social,1
+palito,Roupa social,1
+spencer,Roupa social,1
+tailleur,Roupa social,1
+terno,Roupa social,1
+babydoll,Roupa íntima,1
+bustier,Roupa íntima,1
+calcinha,Roupa íntima,1
+calcinhas,Roupa íntima,1
+cinta,Roupa íntima,1
+corpete,Roupa íntima,1
+corsele,Roupa íntima,1
+corselet,Roupa íntima,1
+corselete,Roupa íntima,1
+corset,Roupa íntima,1
+cueca,Roupa íntima,1
+doll,Roupa íntima,2
+espartilho,Roupa íntima,1
+intimo,Roupa íntima,2
+lingeire,Roupa íntima,1
+lingerie,Roupa íntima,1
+loungerie,Roupa íntima,1
+samba,Roupa íntima,2
+soutien,Roupa íntima,1
+suita,Roupa íntima,1
+sutia,Roupa íntima,1
+sutiao,Roupa íntima,1
+kilt,Saia,2
+lapis,Saia,2
+minisaia,Saia,1
+minissaia,Saia,1
+missaia,Saia,1
+peplum,Saia,2
+saia,Saia,1
+sainha,Saia,1
+tapa,Saia,2
+alpargata,Sapato,1
+alpargatas,Sapato,1
+anabela,Sapato,1
+anabella,Sapato,1
+ankle,Sapato,2
+bota,Sapato,1
+botina,Sapato,1
+botinha,Sapato,1
+chinelinho,Sapato,1
+chinelo,Sapato,1
+chuteira,Sapato,1
+clog,Sapato,2
+coturno,Sapato,1
+crocs,Sapato,1
+derby,Sapato,2
+dock,Sapato,2
+espadilhe,Sapato,1
+espadrile,Sapato,1
+espadrilha,Sapato,1
+espadrilhe,Sapato,1
+espadrille,Sapato,1
+espardrille,Sapato,1
+flatform,Sapato,2
+galocha,Sapato,1
+gladiadora,Sapato,1
+havaianas,Sapato,2
+melissa,Sapato,2
+mocassim,Sapato,1
+mule,Sapato,2
+mulle,Sapato,1
+oxford,Sapato,2
+papete,Sapato,1
+peep,Sapato,2
+peeptoe,Sapato,1
+plataforma,Sapato,2
+rasteira,Sapato,1
+rasteirinha,Sapato,1
+rasteita,Sapato,1
+rasterinha,Sapato,1
+rateira,Sapato,1
+resteirinha,Sapato,1
+sacarpin,Sapato,1
+sadalia,Sapato,1
+salto,Sapato,2
+sandaia,Sapato,1
+sandalia,Sapato,1
+sandalias,Sapato,1
+sandalida,Sapato,1
+sapatenis,Sapato,1
+sapatilha,Sapato,1
+sapatilhas,Sapato,1
+sapatillha,Sapato,1
+sapatinha,Sapato,1
+sapatinho,Sapato,1
+sapato,Sapato,1
+sapatos,Sapato,1
+sapatoto,Sapato,1
+scarin,Sapato,1
+scarpim,Sapato,1
+scarpin,Sapato,1
+scarpn,Sapato,1
+schutz,Sapato,2
+slide,Sapato,2
+slip,Sapato,2
+slipper,Sapato,1
+sneaker,Sapato,1
+spatilha,Sapato,1
+tamanco,Sapato,1
+tenhis,Sapato,1
+tenis,Sapato,1
+tenois,Sapato,1
+toe,Sapato,2
+barmuda,Short,1
+bemuda,Short,1
+bermuda,Short,1
+bermudinha,Short,1
+bermula,Short,1
+hot,Short,2
+hotpant,Short,1
+hotpants,Short,1
+shors,Short,1
+shorst,Short,1
+short,Short,1
+shorta,Short,1
+shortinho,Short,1
+shortinhos,Short,1
+shorts,Short,1
+shots,Short,1
+shrts,Short,1
+bluse,Vestido,1
+chamise,Vestido,1
+chemise,Vestido,1
+dress,Vestido,1
+kaftan,Vestido,1
+kaftans,Vestido,1
+longo,Vestido,2
+salopete,Vestido,1
+tubinho,Vestido,1
+veestido,Vestido,1
+vesido,Vestido,1
+vesitdo,Vestido,1
+vest,Vestido,2
+vestdo,Vestido,1
+vestid,Vestido,1
+vestidinho,Vestido,1
+vestidio,Vestido,1
+vestido,Vestido,1
+vestidocolorido,Vestido,1
+vestidos,Vestido,1
+vestidotira,Vestido,1
+vestidoverde,Vestido,1
+vestio,Vestido,1
+vestiso,Vestido,1
+vestodo,Vestido,1
+vetido,Vestido,1
