@@ -17,7 +17,7 @@ models:
       - name: grupo
         description: 'Empresa ou varejista dono da marca (ex.: "Renner" para "Blue Steel"). Vazio em collabs vendidas pelas duas marcas.'
       - name: segmento
-        description: Tipo de linha (Infantil, Bebê, Juvenil, Masculino, Fitness, Jeans, Básico, Esportivo).
+        description: Tipo de linha (Infantil, Bebê, Juvenil, Masculino, Esportivo, Jeans, Básico).
       - name: e_collab
         description: 'Verdadeiro para colaborações entre marcas. Nesse caso, marca_mae é quem assina e marca_parceira é a outra marca.'
         data_tests: [not_null]

@@ -89,7 +89,7 @@ seeds:
     description: >
       Hierarquia das marcas. Cada marca pode ter uma marca mãe (a marca principal
       da linha), um grupo (a empresa ou varejista dono da marca), um segmento
-      (Infantil, Masculino, Fitness...) e pode ser uma collab.
+      (Infantil, Masculino, Esportivo...) e pode ser uma collab.
       Em collabs, marca_mae é quem assina e marca_parceira é a outra marca.
       Nomes com "para" (Maria Filó para C&A) indicam coleção assinada por uma marca
       e produzida e vendida pela parceira, que também é o grupo.
@@ -109,5 +109,13 @@ seeds:
         data_tests: [unique, not_null]
       - name: marca_mae
         data_tests: [not_null]
+      - name: segmento
+        description: >
+          Lista fechada de segmentos. Para criar um segmento novo, inclua-o
+          também neste teste: assim evitamos dois nomes para a mesma coisa.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Infantil', 'Bebê', 'Juvenil', 'Masculino', 'Esportivo', 'Jeans', 'Básico']
       - name: e_collab
         data_tests: [not_null]

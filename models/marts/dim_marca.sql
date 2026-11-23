@@ -2,7 +2,7 @@
 -- (ex.: "Zara Kids"), com a hierarquia para agrupar em níveis mais amplos:
 --   marca_mae -> a marca principal da linha ("Zara")
 --   grupo     -> a empresa ou varejista dono da marca ("Renner", "C&A")
---   segmento  -> o tipo de linha ("Infantil", "Masculino", "Fitness")
+--   segmento  -> o tipo de linha ("Infantil", "Masculino", "Esportivo")
 -- e uma faixa de preço calculada pelo preço mediano (limites em dbt_project.yml).
 -- A chave (marca_id) é um hash do nome: estável entre execuções.
 
