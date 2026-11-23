@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: revisao_marcas_parecidas
+    description: >
+      Fila de revisão humana. Marcas raras que parecem erro de digitação de uma
+      marca comum, com a sugestão de correção e o grau de confiança.
+      Aceitar: copiar linha_para_map_marca para seeds/map_marca.csv.
+      Rejeitar: adicionar a marca em seeds/revisao_marcas_rejeitadas.csv.
+    columns:
+      - name: marca_chave
+        data_tests: [unique, not_null]
+      - name: confianca
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['alta', 'media', 'baixa']

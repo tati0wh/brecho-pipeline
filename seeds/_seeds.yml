@@ -74,3 +74,40 @@ seeds:
     columns:
       - name: tamanho_chave
         data_tests: [unique, not_null]
+
+  - name: revisao_marcas_rejeitadas
+    description: >
+      Marcas cuja sugestão do fuzzy matching foi revisada e REJEITADA:
+      a marca é ela mesma e não recebe mais sugestões. A coluna motivo diz
+      se é uma marca diferente ou se ficou indeterminada (precisa de mais
+      informação para decidir). As sugestões ACEITAS viram regras no seed map_marca.
+    columns:
+      - name: marca_chave
+        data_tests: [unique, not_null]
+
+  - name: map_marca_hierarquia
+    description: >
+      Hierarquia das marcas. Cada marca pode ter uma marca mãe (a marca principal
+      da linha), um grupo (a empresa ou varejista dono da marca), um segmento
+      (Infantil, Masculino, Fitness...) e pode ser uma collab.
+      Em collabs, marca_mae é quem assina e marca_parceira é a outra marca.
+      Nomes com "para" (Maria Filó para C&A) indicam coleção assinada por uma marca
+      e produzida e vendida pela parceira, que também é o grupo.
+      Nomes com "x" (Farm x Adidas) indicam parceria vendida pelas duas: grupo vazio.
+      Marcas que não estão aqui são "mães de si mesmas".
+    config:
+      column_types:
+        marca: text
+        marca_mae: text
+        marca_parceira: text
+        grupo: text
+        segmento: text
+        e_collab: boolean
+    columns:
+      - name: marca
+        description: Nome padronizado da marca, exatamente como sai do map_marca.
+        data_tests: [unique, not_null]
+      - name: marca_mae
+        data_tests: [not_null]
+      - name: e_collab
+        data_tests: [not_null]

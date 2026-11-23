@@ -3,7 +3,9 @@
 --
 -- Camadas de decisão, da mais forte para a mais fraca:
 --   1. mapeamento: existe uma regra no seed map_marca  -> vale a regra
---   2. automatico: grafia mais comum entre as que têm letra maiúscula
+--   2. regra_letra_unica: a "marca" é uma letra solta ("a", "c")
+--                  -> não identifica nada, vira "Não informada"
+--   3. automatico: grafia mais comum entre as que têm letra maiúscula
 --                  (ex.: "Zara" ganha de "zara"); se todas forem minúsculas,
 --                  usa a primeira letra de cada palavra em maiúscula.
 
@@ -48,14 +50,17 @@ resumo as (
 
 select
     r.marca_chave,
-    coalesce(
-        m.marca_padronizada,
-        case
-            when r.grafia_preferida = lower(r.grafia_preferida) then initcap(r.grafia_preferida)
-            else r.grafia_preferida
-        end
-    )                                                     as marca_padronizada,
-    case when m.marca_chave is not null then 'mapeamento' else 'automatico' end as metodo,
+    case
+        when m.marca_chave is not null    then m.marca_padronizada
+        when length(r.marca_chave) = 1    then 'Não informada'
+        when r.grafia_preferida = lower(r.grafia_preferida) then initcap(r.grafia_preferida)
+        else r.grafia_preferida
+    end                                                   as marca_padronizada,
+    case
+        when m.marca_chave is not null    then 'mapeamento'
+        when length(r.marca_chave) = 1    then 'regra_letra_unica'
+        else 'automatico'
+    end                                                   as metodo,
     m.motivo,
     r.qtd_pecas,
     r.qtd_grafias,

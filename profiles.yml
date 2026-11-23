@@ -1,6 +1,6 @@
 # Configuração de conexão do dbt.
 # Nenhum segredo fica aqui: os valores vêm de variáveis de ambiente,
-# carregadas do .env com o script scripts/carregar_env.ps1.
+# lidas do arquivo .env (o dbt 1.12 carrega o .env da pasta atual sozinho).
 brecho:
   target: dev
   outputs:

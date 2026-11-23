@@ -7,7 +7,10 @@
   A correção desfaz esse caminho: transforma o texto de volta nos bytes
   originais (convert_to) e lê esses bytes como UTF-8 (convert_from).
 
-  Só tenta corrigir textos com os sinais típicos do problema ("Ã" ou "Â").
+  Só tenta corrigir textos com os sinais típicos do problema: "Ã" e "Â"
+  (letras acentuadas quebradas) ou "â" (aspas e apóstrofos curvos quebrados,
+  como "Carterâ€™s"). Um "â" legítimo ("câmera") não vira UTF-8 válido,
+  então a conversão falha e o texto original é mantido.
   Se a conversão falhar, devolve o texto original, sem quebrar o pipeline.
 #}
 {% macro criar_funcao_corrigir_encoding() %}
@@ -17,7 +20,7 @@ language plpgsql
 immutable
 as $func$
 begin
-    if texto is null or texto !~ '[ÃÂ]' then
+    if texto is null or texto !~ '[ÃÂâ]' then
         return texto;
     end if;
 

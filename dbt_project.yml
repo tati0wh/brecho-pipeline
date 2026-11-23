@@ -12,6 +12,7 @@ clean-targets: ["target", "dbt_packages"]
 # Antes de cada execução, garante que a função de correção de encoding existe no banco.
 on-run-start:
   - "create extension if not exists unaccent"
+  - "create extension if not exists pg_trgm"
   - "{{ criar_funcao_corrigir_encoding() }}"
 
 models:
@@ -25,6 +26,21 @@ models:
     marts:
       +schema: marts
       +materialized: table
+    revisao:
+      +schema: revisao
+      +materialized: table
+
+# Parâmetros da fila de revisão (podem ser trocados na linha de comando:
+#   dbt build --vars "{limiar_similaridade: 0.6}")
+vars:
+  limiar_similaridade: 0.5
+  minimo_pecas_referencia: 20
+  # Faixa de preço das marcas, pelo preço mediano no brechó (R$).
+  # Marcas com menos de minimo_pecas_faixa peças ficam como "Poucos dados".
+  faixa_preco_intermediaria: 40
+  faixa_preco_premium: 120
+  faixa_preco_luxo: 400
+  minimo_pecas_faixa: 5
 
 seeds:
   brecho:

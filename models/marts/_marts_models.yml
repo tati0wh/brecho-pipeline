@@ -9,6 +9,25 @@ models:
         data_tests: [unique, not_null]
       - name: marca
         data_tests: [unique, not_null]
+      - name: marca_mae
+        description: 'Marca principal da linha (ex.: "Zara" para "Zara Kids"). Igual à própria marca quando não há hierarquia.'
+        data_tests: [not_null]
+      - name: marca_parceira
+        description: 'Em collabs, a outra marca da parceria (ex.: "C&A" em "Maria Filó para C&A").'
+      - name: grupo
+        description: 'Empresa ou varejista dono da marca (ex.: "Renner" para "Blue Steel"). Vazio em collabs vendidas pelas duas marcas.'
+      - name: segmento
+        description: Tipo de linha (Infantil, Bebê, Juvenil, Masculino, Fitness, Jeans, Básico, Esportivo).
+      - name: e_collab
+        description: 'Verdadeiro para colaborações entre marcas. Nesse caso, marca_mae é quem assina e marca_parceira é a outra marca.'
+        data_tests: [not_null]
+      - name: faixa_preco
+        description: 'Faixa pelo preço mediano no brechó. Limites em dbt_project.yml (vars faixa_preco_*).'
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Acessível', 'Intermediária', 'Premium', 'Luxo', 'Poucos dados', 'Não se aplica']
       - name: e_marca_identificada
         description: Falso para "Sem marca" e "Não informada".
 

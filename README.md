@@ -121,7 +121,7 @@ exatamente qual regra mudar.
 - **Imputação não é papel da camada de dados.** Preço vazio fica vazio. Preencher
   com a média é decisão do modelo de ML, numa camada própria de features.
 - **Nenhum segredo no Git.** Senhas ficam no `.env`, lido pelo Docker, pelo
-  script de carga e pelo dbt. O repositório só tem o `.env.example`.
+  script de carga e pelo dbt (que, a partir da versão 1.12, carrega o `.env` sozinho). O repositório só tem o `.env.example`.
 
 ## Como rodar
 
@@ -148,21 +148,19 @@ pip install -r requirements.txt
 # 4. Carga dos dados brutos
 python scripts\carregar_raw.py data\raw\roupas_usadas.csv
 
-# 5. Transformações e testes
-.\scripts\carregar_env.ps1
+# 5. Transformações e testes (o dbt lê o .env sozinho)
 dbt build
 ```
 
-O resultado esperado do `dbt build` é `PASS=54 WARN=1 ERROR=0`. O aviso lista
-10 peças cujo preço no brechó é maior que o da peça nova, provavelmente erros
-de cadastro.
+O `dbt build` deve terminar sem erros (`ERROR=0`). Os avisos esperados são
+as 10 peças cujo preço no brechó é maior que o da peça nova (provável erro de
+cadastro) e as sugestões de alta confiança ainda não revisadas na fila de marcas.
 
 ### Para retomar o trabalho
 
 ```powershell
 docker compose up -d
 .\.venv\Scripts\Activate.ps1
-.\scripts\carregar_env.ps1
 dbt build
 ```
 
@@ -178,8 +176,7 @@ o projeto, coloque um CSV com as mesmas colunas em `data/raw/roupas_usadas.csv`.
 .
 ├── data/raw/                     # CSV original (fora do Git)
 ├── scripts/
-│   ├── carregar_raw.py           # carga do CSV na camada raw
-│   └── carregar_env.ps1          # carrega o .env no terminal
+│   └── carregar_raw.py           # carga do CSV na camada raw
 ├── macros/
 │   ├── criar_funcao_corrigir_encoding.sql
 │   ├── generate_schema_name.sql

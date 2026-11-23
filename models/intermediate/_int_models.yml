@@ -12,11 +12,11 @@ models:
       - name: marca_padronizada
         data_tests: [not_null]
       - name: metodo
-        description: "mapeamento (regra do seed) ou automatico (grafia preferida)."
+        description: "mapeamento (regra do seed), regra_letra_unica ou automatico (grafia preferida)."
         data_tests:
           - accepted_values:
               arguments:
-                values: ['mapeamento', 'automatico']
+                values: ['mapeamento', 'regra_letra_unica', 'automatico']
 
   - name: int_tipo_peca
     description: Tipo da peça descoberto pelas palavras do nome ou da descrição.
@@ -53,7 +53,7 @@ models:
         data_tests:
           - accepted_values:
               arguments:
-                values: ['mapeamento', 'automatico', 'nao_informado']
+                values: ['mapeamento', 'regra_letra_unica', 'automatico', 'nao_informado']
       - name: condicao_padronizada
         description: >
           Se este teste falhar, apareceu uma condição nova que ainda não
