@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: dim_marca
+    description: Uma linha por marca padronizada, com estatísticas de peças e preços.
+    columns:
+      - name: marca_id
+        description: Chave da marca (hash do nome padronizado).
+        data_tests: [unique, not_null]
+      - name: marca
+        data_tests: [unique, not_null]
+      - name: e_marca_identificada
+        description: Falso para "Sem marca" e "Não informada".
+
+  - name: dim_tipo_peca
+    description: Uma linha por tipo de peça, com um agrupamento amplo (grupo_produto).
+    columns:
+      - name: tipo_peca_id
+        data_tests: [unique, not_null]
+      - name: grupo_produto
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Roupa', 'Calçado', 'Bolsa', 'Acessório', 'Outros']
+
+  - name: dim_condicao
+    description: Uma linha por condição, com a ordem de conservação (1 = mais conservada).
+    columns:
+      - name: condicao_id
+        data_tests: [unique, not_null]
+
+  - name: fct_anuncios
+    description: >
+      Uma linha por peça anunciada. Ponto de partida para análises:
+      junte com as dimensões pelas colunas *_id.
+    columns:
+      - name: id_peca
+        data_tests: [unique, not_null]
+      - name: marca_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_marca')
+                field: marca_id
+      - name: tipo_peca_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_tipo_peca')
+                field: tipo_peca_id
+      - name: condicao_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_condicao')
+                field: condicao_id
+      - name: preco_venda
+        description: Preço da peça no brechó, em reais.
+        data_tests: [not_null]
+      - name: preco_original
+        description: Preço da peça nova, em reais. Pode ser nulo.
+      - name: desconto_percentual
+        description: Quanto o preço do brechó é menor que o da peça nova, em %. Nulo quando não há preço original.
+      - name: preco_suspeito
+        description: Verdadeiro quando o preço no brechó é maior que o da peça nova (provável erro de cadastro).
