@@ -1,0 +1,20 @@
+name: brecho
+version: "1.0.0"
+profile: brecho
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+clean-targets: ["target", "dbt_packages"]
+
+# Antes de cada execução, garante que a função de correção de encoding existe no banco.
+on-run-start:
+  - "{{ criar_funcao_corrigir_encoding() }}"
+
+models:
+  brecho:
+    staging:
+      +schema: staging
+      +materialized: view

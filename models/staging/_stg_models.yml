@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_roupas_usadas
+    description: >
+      Anúncios com limpeza técnica: encoding corrigido, espaços e quebras de
+      linha removidos dos campos curtos, preços convertidos para número e
+      textos vazios transformados em nulo. Nenhuma regra de negócio é aplicada aqui.
+    columns:
+      - name: id_peca
+        description: Identificador da peça no arquivo original.
+        data_tests:
+          - unique
+          - not_null
+      - name: marca
+        description: Marca como a vendedora escreveu, só com espaços e encoding corrigidos.
+      - name: nome_da_peca
+        description: Título do anúncio.
+        data_tests:
+          - not_null
+      - name: tamanho
+        description: Tamanho como a vendedora escreveu (ainda não padronizado).
+      - name: condicao
+        description: Estado de conservação como a vendedora escreveu (ainda não padronizado).
+      - name: cores
+        description: Cor ou cores como a vendedora escreveu (ainda não padronizado).
+      - name: descricao
+        description: Descrição livre do anúncio.
+      - name: preco_com_desconto
+        description: Preço de venda no brechó, em reais.
+        data_tests:
+          - not_null
+      - name: preco_sem_desconto
+        description: Preço original da peça nova, em reais. Pode estar vazio.
