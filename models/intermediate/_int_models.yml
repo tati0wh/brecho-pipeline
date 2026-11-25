@@ -42,11 +42,13 @@ models:
 
   - name: int_roupas_padronizadas
     description: >
-      Anúncios com todas as regras de negócio aplicadas. Cada campo padronizado
-      fica ao lado do valor original e do método usado.
+      Anúncios (histórico e marketplace) com todas as regras de negócio aplicadas.
+      Cada campo padronizado fica ao lado do valor original e do método usado.
     columns:
       - name: id_peca
         data_tests: [unique, not_null]
+      - name: origem
+        data_tests: [not_null]
       - name: marca_padronizada
         data_tests: [not_null]
       - name: metodo_marca

@@ -48,13 +48,46 @@ models:
       - name: condicao_id
         data_tests: [unique, not_null]
 
+  - name: dim_vendedora
+    description: >
+      Uma linha por vendedora do marketplace, com o volume de anúncios e
+      indicadores de qualidade do cadastro (em % dos anúncios dela).
+    columns:
+      - name: id_vendedora
+        data_tests: [unique, not_null]
+      - name: estilo_escrita
+        description: Informação da simulação (num site real, não existiria). Serve para conferir os indicadores.
+      - name: pct_sem_tamanho
+        description: '% dos anúncios sem tamanho informado.'
+      - name: pct_sem_cor
+        description: '% dos anúncios em que a cor não foi informada e teve de ser inferida.'
+      - name: pct_marca_regra
+        description: '% dos anúncios cuja marca só foi resolvida por uma regra do map_marca.'
+
   - name: fct_anuncios
     description: >
-      Uma linha por peça anunciada. Ponto de partida para análises:
-      junte com as dimensões pelas colunas *_id.
+      Uma linha por peça anunciada (histórico e marketplace). Ponto de partida
+      para análises: junte com as dimensões pelas colunas *_id e id_vendedora.
     columns:
       - name: id_peca
         data_tests: [unique, not_null]
+      - name: origem
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['historico', 'marketplace']
+      - name: id_vendedora
+        description: Quem cadastrou. Nulo no histórico.
+        data_tests:
+          - not_null:
+              config:
+                where: "origem = 'marketplace'"
+          - relationships:
+              arguments:
+                to: ref('dim_vendedora')
+                field: id_vendedora
+      - name: data_cadastro
+        description: Data e hora do cadastro. Nulo no histórico.
       - name: marca_id
         data_tests:
           - not_null

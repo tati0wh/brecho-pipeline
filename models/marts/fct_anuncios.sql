@@ -1,5 +1,6 @@
--- Fato de anúncios: uma linha por peça anunciada.
--- Liga-se às dimensões de marca, tipo de peça e condição pelas chaves *_id.
+-- Fato de anúncios: uma linha por peça anunciada (histórico e marketplace).
+-- Liga-se às dimensões de marca, tipo de peça, condição e vendedora pelas chaves.
+-- Anúncios do histórico não têm vendedora nem data de cadastro.
 -- Cor e tamanho ficam aqui mesmo, como atributos da peça.
 
 with pecas as (
@@ -12,8 +13,14 @@ select
     -- chaves
     id_peca,
     md5(marca_padronizada)        as marca_id,
+    id_vendedora,
     md5(tipo_peca)                as tipo_peca_id,
     md5(condicao_padronizada)     as condicao_id,
+
+    -- de onde veio e quando
+    origem,
+    data_cadastro,
+    cast(data_cadastro as date)   as dia_cadastro,
 
     -- descrição da peça
     nome_da_peca,

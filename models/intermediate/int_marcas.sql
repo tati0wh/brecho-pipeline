@@ -14,7 +14,7 @@ with pecas as (
     select
         marca,
         {{ normalizar_chave('marca') }} as marca_chave
-    from {{ ref('stg_roupas_usadas') }}
+    from {{ ref('stg_anuncios') }}
     where marca is not null
 
 ),

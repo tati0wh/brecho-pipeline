@@ -3,6 +3,6 @@
 -- mal formatado pode passar despercebido; este teste força a leitura completa.
 
 select id_peca
-from {{ ref('stg_roupas_usadas') }}
+from {{ ref('stg_anuncios') }}
 where preco_com_desconto < 0
    or preco_sem_desconto < 0

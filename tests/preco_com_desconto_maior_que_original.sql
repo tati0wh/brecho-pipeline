@@ -9,5 +9,5 @@ select
     nome_da_peca,
     preco_com_desconto,
     preco_sem_desconto
-from {{ ref('stg_roupas_usadas') }}
+from {{ ref('stg_anuncios') }}
 where preco_com_desconto > preco_sem_desconto

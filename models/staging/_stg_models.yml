@@ -2,22 +2,51 @@ version: 2
 
 models:
   - name: stg_roupas_usadas
-    description: >
-      Anúncios com limpeza técnica: encoding corrigido, espaços e quebras de
-      linha removidos dos campos curtos, preços convertidos para número e
-      textos vazios transformados em nulo. Nenhuma regra de negócio é aplicada aqui.
+    description: Anúncios do CSV histórico, com limpeza técnica (macros/limpeza.sql).
     columns:
       - name: id_peca
-        description: Identificador da peça no arquivo original.
+        data_tests: [unique, not_null]
+
+  - name: stg_anuncios_marketplace
+    description: Anúncios do marketplace, com a mesma limpeza técnica do histórico.
+    columns:
+      - name: id_peca
+        data_tests: [unique, not_null]
+      - name: id_vendedora
         data_tests:
-          - unique
           - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_vendedoras')
+                field: id_vendedora
+      - name: data_cadastro
+        data_tests: [not_null]
+
+  - name: stg_anuncios
+    description: >
+      Todos os anúncios: histórico e marketplace. Encoding corrigido, espaços e
+      quebras de linha removidos dos campos curtos, preços como número e textos
+      vazios como nulo. Nenhuma regra de negócio é aplicada aqui.
+    columns:
+      - name: id_peca
+        description: >
+          Identificador da peça. No histórico, "hist-" + o número da linha no CSV;
+          no marketplace, o código do anúncio.
+        data_tests: [unique, not_null]
+      - name: origem
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['historico', 'marketplace']
+      - name: id_vendedora
+        description: Quem cadastrou. Nulo no histórico, que não tem essa informação.
+      - name: data_cadastro
+        description: Quando foi cadastrado. Nulo no histórico.
       - name: marca
         description: Marca como a vendedora escreveu, só com espaços e encoding corrigidos.
       - name: nome_da_peca
         description: Título do anúncio.
-        data_tests:
-          - not_null
+        data_tests: [not_null]
       - name: tamanho
         description: Tamanho como a vendedora escreveu (ainda não padronizado).
       - name: condicao
@@ -28,7 +57,12 @@ models:
         description: Descrição livre do anúncio.
       - name: preco_com_desconto
         description: Preço de venda no brechó, em reais.
-        data_tests:
-          - not_null
+        data_tests: [not_null]
       - name: preco_sem_desconto
         description: Preço original da peça nova, em reais. Pode estar vazio.
+
+  - name: stg_vendedoras
+    description: Cadastro das vendedoras do marketplace.
+    columns:
+      - name: id_vendedora
+        data_tests: [unique, not_null]

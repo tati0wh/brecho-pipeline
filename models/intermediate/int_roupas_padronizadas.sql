@@ -13,7 +13,7 @@ with pecas as (
         {{ normalizar_chave('tamanho') }}      as tamanho_chave,
         ' ' || coalesce({{ normalizar_chave('nome_da_peca') }}, '') || ' ' as nome_busca,
         ' ' || coalesce({{ normalizar_chave('descricao') }}, '') || ' '    as descricao_busca
-    from {{ ref('stg_roupas_usadas') }}
+    from {{ ref('stg_anuncios') }}
 
 ),
 
@@ -31,6 +31,9 @@ base as (
 
 select
     b.id_peca,
+    b.origem,
+    b.id_vendedora,
+    b.data_cadastro,
     b.nome_da_peca,
 
     -- tipo de peça

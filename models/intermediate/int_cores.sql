@@ -10,7 +10,7 @@
 with pecas as (
 
     select id_peca, nome_da_peca, descricao, cores
-    from {{ ref('stg_roupas_usadas') }}
+    from {{ ref('stg_anuncios') }}
 
 ),
 

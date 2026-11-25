@@ -2,8 +2,18 @@ version: 2
 
 sources:
   - name: raw
-    description: Dados brutos, carregados pelo script scripts/carregar_raw.py, sem nenhuma alteração nos valores.
+    description: Dados brutos, sem nenhuma alteração nos valores.
     schema: raw
     tables:
       - name: roupas_usadas
-        description: Anúncios de roupas usadas, exatamente como vieram do CSV original.
+        description: >
+          Anúncios do CSV histórico, exatamente como vieram.
+          Carregado pelo script scripts/carregar_raw.py.
+      - name: anuncios
+        description: >
+          Anúncios que chegam do marketplace, um arquivo por dia.
+          Carregado de forma incremental pelo script scripts/carregar_novos.py.
+      - name: vendedoras
+        description: >
+          Cadastro das vendedoras do marketplace (substituído a cada carga).
+          O estilo_escrita é uma informação da simulação: num site real, não existiria.
