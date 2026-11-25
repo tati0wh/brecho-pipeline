@@ -45,6 +45,42 @@ services:
       - .:/opt/brecho
       - airflow_home:/opt/airflow
 
+  # Redpanda: plataforma de streaming compatível com Kafka, para o drop ao vivo.
+  # Só sobe quando pedido:  docker compose --profile streaming up -d
+  redpanda:
+    profiles: ["streaming"]
+    image: docker.redpanda.com/redpandadata/redpanda:v26.1.12
+    container_name: brecho_redpanda
+    command:
+      - redpanda
+      - start
+      # Dois endereços: "internal" para quem está na rede do Docker,
+      # "external" (porta 19092) para os scripts que rodam no Windows.
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+      # Configurações pensadas para desenvolvimento em container.
+      - --mode dev-container
+      # Usa 1 núcleo do processador e no máximo 1 GB de memória.
+      - --smp 1
+      - --memory 1G
+    ports:
+      - "19092:19092"
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+
+  # Interface web para ver os tópicos e as mensagens: http://localhost:8085
+  redpanda-console:
+    profiles: ["streaming"]
+    image: docker.redpanda.com/redpandadata/console:v3.10.0
+    container_name: brecho_redpanda_console
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+    ports:
+      - "8085:8080"
+    depends_on:
+      - redpanda
+
 volumes:
   brecho_pgdata:
   airflow_home:
+  redpanda_data:
