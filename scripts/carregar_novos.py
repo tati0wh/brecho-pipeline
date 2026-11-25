@@ -13,7 +13,7 @@ uma "impressão digital" (hash SHA-256) do conteúdo:
 
 Por isso a carga é idempotente: rodar duas vezes dá o mesmo resultado, sem duplicar.
 Os anúncios entram como vieram (texto), seguindo a regra de que o raw é sagrado.
-As vendedoras são o cadastro completo do site: a tabela é substituída a cada carga.
+As vendedoras são o cadastro completo do site: o conteúdo da tabela é trocado a cada carga.
 
 Uso:
     python scripts/carregar_novos.py
@@ -107,6 +107,20 @@ def carregar_anuncios(engine) -> None:
           f"{pulados} já carregado(s); {linhas} linha(s) inserida(s).")
 
 
+def substituir_conteudo(engine, df: pd.DataFrame, tabela: str) -> None:
+    """Troca todo o conteúdo da tabela sem apagá-la.
+
+    Apagar e recriar a tabela (if_exists="replace") falharia, porque as views
+    do dbt dependem dela. Esvaziar (TRUNCATE) e inserir de novo mantém a tabela
+    e as views. Tudo numa transação: se der erro, o conteúdo antigo continua lá.
+    """
+    with engine.begin() as conn:
+        existe = conn.execute(text("select to_regclass(:t)"), {"t": f"raw.{tabela}"}).scalar()
+        if existe:
+            conn.execute(text(f"truncate table raw.{tabela}"))
+        df.to_sql(tabela, conn, schema="raw", if_exists="append", index=False)
+
+
 def carregar_vendedoras(engine) -> None:
     if not ARQUIVO_VENDEDORAS.exists():
         print("Vendedoras: nenhum cadastro encontrado.")
@@ -114,7 +128,7 @@ def carregar_vendedoras(engine) -> None:
     cadastro = json.loads(ARQUIVO_VENDEDORAS.read_text(encoding="utf-8"))
     df = pd.DataFrame(cadastro["vendedoras"]).astype("string")
     df["_carregado_em"] = datetime.now(timezone.utc)
-    df.to_sql("vendedoras", engine, schema="raw", if_exists="replace", index=False)
+    substituir_conteudo(engine, df, "vendedoras")
     print(f"Vendedoras: {len(df)} no cadastro.")
 
 

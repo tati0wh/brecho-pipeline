@@ -61,9 +61,15 @@ def main(caminho_csv: str) -> None:
     with engine.begin() as conn:
         conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {SCHEMA}"))
 
-    # if_exists="replace" torna a carga idempotente: rodar duas vezes
-    # dá o mesmo resultado, sem duplicar linhas.
-    df.to_sql(TABELA, engine, schema=SCHEMA, if_exists="replace", index=False, chunksize=5000)
+    # Troca todo o conteúdo da tabela: rodar duas vezes dá o mesmo resultado,
+    # sem duplicar linhas (carga idempotente). A tabela é esvaziada (TRUNCATE)
+    # em vez de apagada, porque as views do dbt dependem dela. Tudo numa
+    # transação: se der erro, o conteúdo antigo continua lá.
+    with engine.begin() as conn:
+        existe = conn.execute(text("select to_regclass(:t)"), {"t": f"{SCHEMA}.{TABELA}"}).scalar()
+        if existe:
+            conn.execute(text(f"truncate table {SCHEMA}.{TABELA}"))
+        df.to_sql(TABELA, conn, schema=SCHEMA, if_exists="append", index=False, chunksize=5000)
 
     with engine.connect() as conn:
         total = conn.execute(text(f"SELECT COUNT(*) FROM {SCHEMA}.{TABELA}")).scalar()

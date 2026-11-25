@@ -11,5 +11,40 @@ services:
     volumes:
       - brecho_pgdata:/var/lib/postgresql/data
 
+  # Airflow em modo standalone: scheduler, processador de DAGs, triggerer e
+  # interface web num container só. Bom para desenvolvimento, não para produção.
+  # Só sobe quando pedido:  docker compose --profile airflow up -d
+  airflow:
+    profiles: ["airflow"]
+    build:
+      context: .
+      dockerfile: airflow/Dockerfile
+    container_name: brecho_airflow
+    command: standalone
+    depends_on:
+      - postgres
+    env_file: .env
+    environment:
+      # Dentro da rede do Docker, o banco se chama "postgres" e usa a porta interna 5432
+      # (a 5433 só existe do lado do Windows). Estes valores têm prioridade sobre o .env.
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      PROJETO_DIR: /opt/brecho
+      PIPELINE_PYTHON: /home/airflow/pipeline-venv/bin/python
+      # O dbt do container grava os arquivos dele fora da pasta do projeto,
+      # para não misturar com os do dbt que você roda no Windows.
+      DBT_TARGET_PATH: /opt/airflow/dbt/target
+      DBT_LOG_PATH: /opt/airflow/dbt/logs
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/brecho/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      # Sem tela de login: aceitável só num Airflow local, que roda na sua máquina.
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "True"
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/opt/brecho
+      - airflow_home:/opt/airflow
+
 volumes:
   brecho_pgdata:
+  airflow_home:
