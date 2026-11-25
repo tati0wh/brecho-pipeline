@@ -33,7 +33,8 @@ models:
 # Parâmetros da fila de revisão (podem ser trocados na linha de comando:
 #   dbt build --vars "{limiar_similaridade: 0.6}")
 vars:
-  limiar_similaridade: 0.5
+  limiar_similaridade: 0.5          # abaixo disso, nem vira sugestão
+  limiar_aceite_automatico: 0.85    # a partir disso, a sugestão é aplicada sem revisão humana
   minimo_pecas_referencia: 20
   # Faixa de preço das marcas, pelo preço mediano no brechó (R$).
   # Marcas com menos de minimo_pecas_faixa peças ficam como "Poucos dados".

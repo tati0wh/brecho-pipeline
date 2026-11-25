@@ -3,8 +3,8 @@ version: 2
 models:
   - name: revisao_marcas_parecidas
     description: >
-      Fila de revisão humana. Marcas raras que parecem erro de digitação de uma
-      marca comum, com a sugestão de correção e o grau de confiança.
+      Fila de revisão humana. Sugestões do fuzzy matching abaixo do limiar de
+      aceite automático, com o grau de confiança.
       Aceitar: copiar linha_para_map_marca para seeds/map_marca.csv.
       Rejeitar: adicionar a marca em seeds/revisao_marcas_rejeitadas.csv.
     columns:
@@ -15,3 +15,12 @@ models:
           - accepted_values:
               arguments:
                 values: ['alta', 'media', 'baixa']
+
+  - name: revisao_marcas_aceitas_automaticamente
+    description: >
+      Auditoria: sugestões aplicadas sem revisão humana (similaridade acima do
+      limiar de aceite automático). Para desfazer uma, adicione a marca em
+      seeds/revisao_marcas_rejeitadas.csv.
+    columns:
+      - name: marca_chave
+        data_tests: [unique, not_null]
