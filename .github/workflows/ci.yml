@@ -1,0 +1,72 @@
+# CI do pipeline: a cada push ou pull request, o GitHub liga uma máquina
+# temporária, sobe um Postgres, roda o pipeline inteiro com dados sintéticos
+# e avisa se algo quebrou (um modelo com erro ou um teste falhando).
+
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    # Um Postgres só para o CI, que existe enquanto o job roda.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: brecho
+          POSTGRES_PASSWORD: brecho_ci
+          POSTGRES_DB: brecho
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U brecho"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    # As mesmas variáveis do .env, com os valores do Postgres do CI.
+    # (A senha não é segredo: esse banco só existe durante o job.)
+    env:
+      POSTGRES_USER: brecho
+      POSTGRES_PASSWORD: brecho_ci
+      POSTGRES_DB: brecho
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: "5432"
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v5
+
+      - name: Instalar o Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar as dependências
+        run: pip install -r requirements.txt
+
+      - name: Gerar a base histórica sintética
+        run: python ci/gerar_amostra.py
+
+      - name: Carregar a base no raw
+        run: python scripts/carregar_raw.py data/raw/roupas_usadas.csv
+
+      - name: Simular dois dias do marketplace
+        run: |
+          python scripts/simulador/gerar_anuncios.py --data 2026-01-01 --quantidade 100 --semente 1
+          python scripts/simulador/gerar_anuncios.py --data 2026-01-02 --quantidade 100 --semente 2
+          python scripts/carregar_novos.py
+
+      - name: Simular um drop (sem Redpanda)
+        run: python ci/simular_drop_sem_kafka.py
+
+      - name: Rodar o dbt (modelos e testes)
+        run: dbt build
+
+      - name: Rodar o dbt de novo (o pipeline precisa ser idempotente)
+        run: dbt build
