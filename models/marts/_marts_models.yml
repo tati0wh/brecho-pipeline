@@ -118,3 +118,36 @@ models:
         description: Quanto o preço do brechó é menor que o da peça nova, em %. Nulo quando não há preço original.
       - name: preco_suspeito
         description: Verdadeiro quando o preço no brechó é maior que o da peça nova (provável erro de cadastro).
+
+  - name: fct_drop_eventos
+    description: >
+      Uma linha por evento dos drops (clique), com a marcação de suspeita de bot
+      calculada por uma janela deslizante de 10 segundos.
+    columns:
+      - name: id_evento
+        data_tests: [unique, not_null]
+      - name: e_cliente_suspeita_bot
+        description: 'Verdadeiro se a cliente fez mais carrinhos em 10s do que o limite (var limite_bot_carrinhos_10s).'
+
+  - name: fct_drop_pecas
+    description: >
+      Uma linha por peça em cada drop: funil, compras recusadas e tempo até vender,
+      com marca e tipo de peça. Eventos de clientes suspeitas de bot ficam de fora.
+    columns:
+      - name: marca_id
+        description: 'Vazio se a peça do drop ainda não estiver no fct_anuncios (rode a carga e o dbt antes do drop).'
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_marca')
+                field: marca_id
+              config:
+                severity: warn
+
+  - name: dim_drop
+    description: >
+      Uma linha por drop: duração, peças vendidas, receita, disputas, bots,
+      latência e o funil de clientes (viram -> carrinho -> compraram).
+    columns:
+      - name: id_drop
+        data_tests: [unique, not_null]

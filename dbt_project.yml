@@ -42,6 +42,9 @@ vars:
   faixa_preco_premium: 120
   faixa_preco_luxo: 400
   minimo_pecas_faixa: 5
+  # Drops: mais carrinhos que isso em 10 segundos = cliente suspeita de bot
+  # (o mesmo limite usado pelo consumidor em tempo real)
+  limite_bot_carrinhos_10s: 10
 
 seeds:
   brecho:

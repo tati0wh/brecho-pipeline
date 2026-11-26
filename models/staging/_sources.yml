@@ -17,3 +17,7 @@ sources:
         description: >
           Cadastro das vendedoras do marketplace (substituído a cada carga).
           O estilo_escrita é uma informação da simulação: num site real, não existiria.
+      - name: drop_eventos
+        description: >
+          Eventos dos drops, gravados em tempo real pelo consumidor
+          scripts/streaming/processar_drop.py (sem duplicados).

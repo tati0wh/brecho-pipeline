@@ -66,3 +66,15 @@ models:
     columns:
       - name: id_vendedora
         data_tests: [unique, not_null]
+
+  - name: stg_drop_eventos
+    description: Eventos dos drops, um por linha, com a latência de chegada.
+    columns:
+      - name: id_evento
+        data_tests: [unique, not_null]
+      - name: tipo
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['visualizou_peca', 'curtiu', 'adicionou_ao_carrinho',
+                         'removeu_do_carrinho', 'comprou', 'compra_recusada']
